@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
-import "./HomePage.css";
 
 let endPoint = "http://localhost:5000";
 let socket = io.connect(`${endPoint}`);
@@ -39,16 +38,6 @@ const HomePage = () => {
 
   return (
     <div>
-      <div>
-        <h3 className="header">Number Game</h3>
-        <h4 className="score">Score : 0</h4>
-
-        <div className="display">
-          <div className="column">
-            <img src="/apple.png" alt="apple" />
-          </div>
-        </div>
-      </div>
       {messages.length > 0 &&
         messages.map((msg) => (
           <div>
