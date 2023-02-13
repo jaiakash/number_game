@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.js"></script>
+  <script type="text/javascript" src="static/home.js"></script>
+  <link rel="stylesheet" href="static/home.css" />
+
+  <head>
+    <link href="static/favicon.ico" rel="icon" type="image/x-icon" />
+    <title>Number Game</title>
+  </head>
+
+  <body>
+    <embed
+      src="static/background.mp3"
+      loop="true"
+      autostart="true"
+      width="2"
+      height="2"
+    />
+
+    <h3 class="header">Number Game</h3>
+    <h4 class="score">Score : 0</h4>
+
+    <div class="display">
+      <div class="column">
+        <img src="static/apple.png" style="width: 100px" />
+      </div>
+    </div>
+
+    <h3 style="margin: 60px">Select the number of apples...</h3>
+
+    <form action="/" method="POST">
+      <input
+        type="image"
+        src="static/numbers/1.png"
+        class="d1"
+        width="100"
+        height="100"
+      />
+      <input
+        type="image"
+        src="static/numbers/1.png"
+        class="d2"
+        width="100"
+        height="100"
+      />
+      <input
+        type="image"
+        src="static/numbers/1.png"
+        class="d3"
+        width="100"
+        height="100"
+      />
+    </form>
+  </body>
+</html>
