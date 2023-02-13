@@ -4,7 +4,7 @@ import io from "socket.io-client";
 let endPoint = "http://localhost:5000";
 let socket = io.connect(`${endPoint}`);
 
-const App = () => {
+const HomePage = () => {
   const [messages, setMessages] = useState(["Hello And Welcome"]);
   const [message, setMessage] = useState("");
 
@@ -50,4 +50,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default HomePage;
