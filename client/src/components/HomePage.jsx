@@ -5,58 +5,67 @@ import "./HomePage.css";
 let endPoint = "http://localhost:5000";
 let socket = io.connect(`${endPoint}`);
 
+var serverData = socket.emit("message", [0, 0]);
+
 const HomePage = () => {
-  const [messages, setMessages] = useState(["Hello And Welcome"]);
-  const [message, setMessage] = useState("");
+  const [startingNumber, setStartingNumber] = useState(serverData[1]);
+  const [display, setDisplay] = useState(serverData[0]);
 
   useEffect(() => {
-    getMessages();
-  }, [messages.length]);
-
-  const getMessages = () => {
-    socket.on("message", (msg) => {
-      //   let allMessages = messages;
-      //   allMessages.push(msg);
-      //   setMessages(allMessages);
-      setMessages([...messages, msg]);
-    });
-  };
-
-  // On Change
-  const onChange = (e) => {
-    setMessage(e.target.value);
-  };
-
-  // On Click
-  const onClick = () => {
-    if (message !== "") {
-      socket.emit("message", message);
-      setMessage("");
-    } else {
-      alert("Please Add A Message");
-    }
-  };
+    serverData = socket.emit("message", [0, 0]);
+    setDisplay.setState(serverData[0]);
+    setStartingNumber.setState(serverData[1]);
+    // console.log(startingNumber);
+  }, []);
 
   return (
     <div>
       <div>
         <h3 className="header">Number Game</h3>
-        <h4 className="score">Score : 0</h4>
+        <h4 className="score">{"Score : " + startingNumber}</h4>
+        {
+          <div className="display">
+            {Array(startingNumber).fill(
+              <div className="column">
+                <img src="/apple.png" alt="apple" width="100px" />
+              </div>
+            )}
+          </div>
+        }
 
-        <div className="display">
-          <div className="column">
-            <img src="/apple.png" alt="apple" />
-          </div>
-        </div>
-      </div>
-      {messages.length > 0 &&
-        messages.map((msg) => (
+        <h3>Select the number of apples...</h3>
+        {
           <div>
-            <p>{msg}</p>
+            <img
+              onClick={() => {
+                socket.emit("message", serverData[0][0]);
+              }}
+              alt="one"
+              src={"numbers/" + serverData[0][0] + ".png"}
+              width="100"
+              height="100"
+            />
+            <img
+              alt="one"
+              onClick={() => {
+                socket.emit("message", serverData[0][1]);
+              }}
+              src={"numbers/" + serverData[0][1] + ".png"}
+              width="100"
+              height="100"
+            />
+            <img
+              alt="one"
+              onClick={() => {
+                socket.emit("message", serverData[0][2]);
+              }}
+              src={"numbers/" + serverData[0][2] + ".png"}
+              width="100"
+              height="100"
+            />
           </div>
-        ))}
-      <input value={message} name="message" onChange={(e) => onChange(e)} />
-      <button onClick={() => onClick()}>Send Message</button>
+        }
+      </div>
     </div>
   );
 };
